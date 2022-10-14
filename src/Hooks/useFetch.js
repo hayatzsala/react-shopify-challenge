@@ -7,12 +7,15 @@ const useFetch = (url, searchKey)=>{
     useEffect(()=>{
         function fetchData(){
             setIsLoading(true);
-            fetch(url + searchKey)
-            .then(response => {
-                //console.log(response)
-                return response.json()})
+            const urlFetch = url+searchKey;
+            console.log('urlll' + urlFetch);
+            fetch(urlFetch)
+            .then(response =>{
+                
+                return response.json()
+            })
             .then(dataList => {
-                console.log(dataList);
+                console.log('fetch result',dataList);
                 //debugger
                 setData(dataList);
                 setError(null);
@@ -25,7 +28,8 @@ const useFetch = (url, searchKey)=>{
 
         }
         fetchData();
-    })
+    },[url,searchKey])
+    return [data,error,isLoading];
 }
 
 export default useFetch;
